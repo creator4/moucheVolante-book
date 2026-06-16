@@ -6856,7 +6856,7 @@ function draw() {
   // Kern weich angeglichen an Corona: größer, diffuser, geringerer Alpha
   // → keine harte Trennung mehr zwischen heller Corona und dunklem Kern
   {
-    drawHFStyleCloudFleck(biggerCloud, 1.1, 1, 3.75);
+    drawHFStyleCloudFleck(biggerCloud, 1.22, 1, 2.85);
     drawCloudLabel('F1', biggerCloud);
     if (upperLeftGreyCloud) {
       const f2Follow = createVector(
@@ -7119,7 +7119,7 @@ function draw() {
       if (compareLabel === 'Dreieck') {
         drawingContext.save();
         drawingContext.globalAlpha = 1;
-        drawingContext.filter = 'blur(0.7px) contrast(1.56) brightness(1.21)';
+        drawingContext.filter = 'blur(1.05px) contrast(1.52) brightness(1.19)';
         drawStaticRoundTestReplica('', sp.x + ox, sp.y + oy, r * 0.94);
         drawStaticRoundTestReplica('', sp.x + ox, sp.y + oy, r * 0.94);
         drawStaticRoundTestReplica('', sp.x + ox, sp.y + oy, r * 0.94);
