@@ -56,8 +56,8 @@ const FLOATER_EASE       = 0.08;
 
 /* Fleck als Mini-Superfleck (lokal am Floater) – RESET auf Referenz */
 const FLECK_SUPER_SIZE      = 44;
-const FLECK_SUPER_TINT      = [26,27,34];           // etwas dunkler, aber nicht hart schwarz
-const FLECK_SUPER_ALPHA     = 0.40;
+const FLECK_SUPER_TINT      = [10,11,15];           // dunklerer HF-Fleck
+const FLECK_SUPER_ALPHA     = 0.54;
 const FLECK_SUPER_FEATHER   = 1.05;
 const FLECK_SUPER_DRAW_W    = 60 * SCALE * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.82 * 1.06; // etwas größer
 const FLECK_SUPER_DRAW_H    = FLECK_SUPER_DRAW_W * 0.88;
@@ -111,7 +111,7 @@ const ORIGINAL_SCHL_COUNT = BASE_SCHL_COUNT + EXTRA_SCHL_COUNT;
 const SOFT_EXTRA_SCHL_COUNT = 22;
 const SCHL_COUNT        = ORIGINAL_SCHL_COUNT + SOFT_EXTRA_SCHL_COUNT;
 const SCHLC_TINT        = [98,100,114];
-const SCHLC_ALPHA       = 0.225;  // sehr transparent
+const SCHLC_ALPHA       = 0.237;  // sehr transparent
 const SCHLC_FEATHER     = 5.6;
 const SCHLC_LEN_MIN     = 76 * SCALE;
 const SCHLC_LEN_MAX     = 300 * SCALE;
@@ -128,12 +128,12 @@ function isSoftSchliereNumber(n) {
 /* Hellere Schlieren */
 const BRIGHT_SCHL_COUNT = 0;
 const BRIGHT_SCHLC_TINT = [100,102,116];
-const BRIGHT_SCHLC_ALPHA = 0.205;  // gleich transparent wie Grundschlieren
+const BRIGHT_SCHLC_ALPHA = 0.214;  // gleich transparent wie Grundschlieren
 
 /* Gelartige Schlieren – wie weiße Flecken, aber transparenter & gelartiger */
 const GEL_SCHL_COUNT = 0;
 const GEL_SCHLC_TINT = [104,108,122];
-const GEL_SCHLC_ALPHA = 0.185;  // gleich transparent wie Grundschlieren
+const GEL_SCHLC_ALPHA = 0.193;  // gleich transparent wie Grundschlieren
 const GEL_SCHLC_FEATHER = 1.0;
 const GEL_SCHLC_THICK_MIN = SCHLC_THICK_MIN;
 const GEL_SCHLC_THICK_MAX = SCHLC_THICK_MIN;
@@ -5753,7 +5753,7 @@ class FloaterPath {
     image(floaterFleckCloud.pg, 0, 0, FLECK_SUPER_DRAW_W, FLECK_SUPER_DRAW_H);
     drawingContext.save();
     drawingContext.filter = `blur(${FLECK_SUPER_BLUR_PX * 2.4}px)`;
-    drawingContext.fillStyle = 'rgba(28, 30, 38, 0.23)';
+    drawingContext.fillStyle = 'rgba(8, 9, 13, 0.34)';
     drawingContext.beginPath();
     drawingContext.ellipse(
       FLECK_SUPER_DRAW_W * 0.22,

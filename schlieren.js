@@ -16,7 +16,7 @@ let travelPhase = 0;
 let frameIndex = 0;
 let motionTotal = { x: 0, y: 0 };
 const SCHLIERE_SPRITE_REFRESH_FRAMES = 4;
-const SCHLIEREN_ALPHA_MUL = 2.38;
+const SCHLIEREN_ALPHA_MUL = 2.50;
 const SCHLIEREN_THICKNESS_MUL = 0.43;
 
 const SCHLIEREN = [
