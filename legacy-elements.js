@@ -3310,7 +3310,7 @@ const SHOW_CLOUDS = true;
 const SHOW_CLOUD_LABELS = false;
 const SHOW_SMALLER_CLOUD = false;
 const ELEMENT_ALPHA = 1.42;
-const NON_HF_ELEMENT_ALPHA = 2.78;
+const NON_HF_ELEMENT_ALPHA = 2.45;
 
 function elementVisibilityFactor(label) {
   if (label === 'Nuclei-Gruppe') return 0.38;
@@ -5576,6 +5576,8 @@ class FloaterPath {
   displayFloater() {
     push();
     scale(this.lengthStretch * 0.92, 1);  // minimal horizontal zusammengestaucht
+    drawingContext.save();
+    drawingContext.globalAlpha *= 0.78;
 
     // 1) Äußerster Gel-Glow – breit, sichtbar transparent, leicht weisslicher
     drawingContext.filter = 'blur(8px)';
@@ -5662,6 +5664,7 @@ class FloaterPath {
     drawOffsetPath(-5.4);
     drawingContext.filter = 'none';
 
+    drawingContext.restore();
     pop();
   }
 
@@ -6856,7 +6859,7 @@ function draw() {
   // Kern weich angeglichen an Corona: größer, diffuser, geringerer Alpha
   // → keine harte Trennung mehr zwischen heller Corona und dunklem Kern
   {
-    drawHFStyleCloudFleck(biggerCloud, 1.22, 1, 2.45);
+    drawHFStyleCloudFleck(biggerCloud, 1.22, 1, 2.15);
     drawCloudLabel('F1', biggerCloud);
     if (upperLeftGreyCloud) {
       const f2Follow = createVector(
@@ -6872,7 +6875,7 @@ function draw() {
         1.55
       );
     }
-    drawHFStyleCloudFleck(upperLeftGreyCloud, 1.0, 2.10, 3.58);
+    drawHFStyleCloudFleck(upperLeftGreyCloud, 1.0, 2.10, 3.05);
     drawCloudLabel('F2', upperLeftGreyCloud);
     if (SHOW_CLOUDS) {
       f2CenterCopies.forEach((c, i) => {
@@ -6881,7 +6884,7 @@ function draw() {
           mouseDirNS.y * 0.72 + cos(frameCount * 0.012 + i) * 0.06
         );
         c.update(mouseMoving, [0.39, 0.61], [0.42, 0.62], SMALLER_SPEED_SCALE * 1.08, follow, 1.28);
-        drawHFStyleCloudFleck(c, 1.0, 2.10, 3.58);
+        drawHFStyleCloudFleck(c, 1.0, 2.10, 3.05);
       });
     }
   }
@@ -6994,7 +6997,7 @@ function draw() {
       smallerFollow,
       2.05
     );
-    drawHFStyleCloudFleck(smallerCloud, 1.0, 2.10, 3.12);
+    drawHFStyleCloudFleck(smallerCloud, 1.0, 2.10, 2.65);
     drawCloudLabel('F3', smallerCloud);
   }
   // Weisser Superfleck temporÃ¤r ausgeblendet.
