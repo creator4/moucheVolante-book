@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 const canvas = document.getElementById('scene');
 const mainCtx = canvas.getContext('2d');
 let ctx = mainCtx;
@@ -22,26 +22,26 @@ const LIGHT_SCHLIEREN_ALPHA_MUL = 1.22;
 const SCHLIEREN_THICKNESS_MUL = 0.86;
 
 const SCHLIEREN = [
-  { x: 0.31, y: 0.34, len: 360, thick: 0.56, curve: 58, angle: -48, alpha: 0.86, seed: 1.7, shape: 'comma', fleckAlpha: 0.72 },
+  { x: 0.31, y: 0.30, len: 360, thick: 0.56, curve: 58, angle: -48, alpha: 0.88, seed: 1.7, shape: 'comma', fleckAlpha: 0.72 },
   { x: 0.29, y: 0.10, len: 28, thick: 0.34, curve: -5, angle: 63, alpha: 0.58, seed: 3.2, shape: 'dot', fleckAlpha: 0.42 },
-  { x: 0.67, y: 0.36, len: 390, thick: 0.46, curve: 62, angle: 34, alpha: 0.84, seed: 4.8, shape: 'zig' },
+  { x: 0.67, y: 0.34, len: 390, thick: 0.46, curve: 62, angle: 34, alpha: 0.86, seed: 4.8, shape: 'zig' },
   { x: 0.75, y: 0.10, len: 48, thick: 0.42, curve: 10, angle: -71, alpha: 0.54, seed: 6.1, shape: 'arc', fleckAlpha: 0.55 },
-  { x: 0.92, y: 0.22, len: 620, thick: 0.54, curve: -54, angle: 82, alpha: 0.70, seed: 8.4, shape: 'loop', fleckAlpha: 0.88 },
+  { x: 0.92, y: 0.26, len: 620, thick: 0.54, curve: -54, angle: 82, alpha: 0.74, seed: 8.4, shape: 'loop', fleckAlpha: 0.84 },
   { x: 0.19, y: 0.30, len: 70, thick: 0.32, curve: 14, angle: -37, alpha: 0.52, seed: 10.2, shape: 'arc' },
   { x: 0.42, y: 0.31, len: 380, thick: 0.42, curve: -22, angle: 118, alpha: 0.62, seed: 12.6, shape: 'kink', fleckAlpha: 0.50 },
   { x: 0.67, y: 0.32, len: 24, thick: 0.30, curve: 4, angle: -102, alpha: 0.50, seed: 15.1, shape: 'dot', fleckAlpha: 0.38 },
   { x: 0.87, y: 0.37, len: 60, thick: 0.34, curve: 12, angle: 45, alpha: 0.56, seed: 16.7, shape: 'hook' },
-  { x: 0.35, y: 0.66, len: 440, thick: 0.62, curve: -72, angle: -29, alpha: 0.90, seed: 18.3, shape: 'fold', fleckAlpha: 0.74 },
+  { x: 0.35, y: 0.58, len: 440, thick: 0.62, curve: -72, angle: -29, alpha: 0.82, seed: 18.3, shape: 'fold', fleckAlpha: 0.68 },
   { x: 0.35, y: 0.49, len: 180, thick: 0.40, curve: 22, angle: 76, alpha: 0.64, seed: 20.9, shape: 'arc', fleckAlpha: 0.44 },
   { x: 0.58, y: 0.53, len: 560, thick: 0.46, curve: -48, angle: -64, alpha: 0.60, seed: 22.4, shape: 'loop' },
   { x: 0.79, y: 0.50, len: 34, thick: 0.30, curve: 5, angle: 132, alpha: 0.48, seed: 24.8, shape: 'dot', fleckAlpha: 0.36 },
   { x: 0.94, y: 0.58, len: 250, thick: 0.46, curve: -24, angle: 25, alpha: 0.62, seed: 27.2, shape: 'hook', fleckAlpha: 0.62 },
   { x: 0.18, y: 0.71, len: 46, thick: 0.28, curve: 8, angle: -126, alpha: 0.46, seed: 29.5, shape: 'arc' },
-  { x: 0.43, y: 0.69, len: 650, thick: 0.54, curve: 56, angle: 57, alpha: 0.72, seed: 31.4, shape: 'kink', fleckAlpha: 0.86 },
+  { x: 0.47, y: 0.44, len: 650, thick: 0.54, curve: 56, angle: 57, alpha: 0.70, seed: 31.4, shape: 'kink', fleckAlpha: 0.78 },
   { x: 0.64, y: 0.73, len: 82, thick: 0.36, curve: -14, angle: -41, alpha: 0.54, seed: 34.0, shape: 'kink', fleckAlpha: 0.45 },
   { x: 0.85, y: 0.72, len: 210, thick: 0.42, curve: 20, angle: 104, alpha: 0.58, seed: 36.6, shape: 'arc' },
   { x: 0.27, y: 0.88, len: 56, thick: 0.32, curve: -10, angle: -75, alpha: 0.52, seed: 38.7, shape: 'hook', fleckAlpha: 0.40 },
-  { x: 0.70, y: 0.67, len: 480, thick: 0.58, curve: 70, angle: 14, alpha: 0.88, seed: 40.9, shape: 'loop', fleckAlpha: 0.70 },
+  { x: 0.70, y: 0.60, len: 480, thick: 0.58, curve: 70, angle: 14, alpha: 0.80, seed: 40.9, shape: 'loop', fleckAlpha: 0.64 },
   { x: -0.04, y: 0.18, len: 130, thick: 0.34, curve: 18, angle: 36, alpha: 0.44, seed: 43.1, shape: 'arc', edge: true, fleckAlpha: 0.32 },
   { x: 1.04, y: 0.24, len: 92, thick: 0.30, curve: -12, angle: -58, alpha: 0.38, seed: 45.2, shape: 'hook', edge: true },
   { x: 0.14, y: -0.05, len: 170, thick: 0.36, curve: 22, angle: 105, alpha: 0.42, seed: 47.3, shape: 'kink', edge: true, fleckAlpha: 0.28 },
@@ -82,7 +82,7 @@ const HELLE_SCHLIEREN = [
   { x: 0.10, y: 0.70, len: 84, thick: 0.15, curve: -9, angle: 105, alpha: 0.24, seed: 209.9, shape: 'arc', light: true },
   { x: 0.36, y: 0.72, len: 232, thick: 0.21, curve: 31, angle: -18, alpha: 0.33, seed: 211.0, shape: 'kink', light: true },
   { x: 0.62, y: 0.74, len: 138, thick: 0.17, curve: -15, angle: 138, alpha: 0.27, seed: 212.1, shape: 'fold', light: true },
-  { x: 0.84, y: 0.82, len: 118, thick: 0.16, curve: 12, angle: 42, alpha: 0.29, seed: 213.2, shape: 'arc', light: true },
+  { x: 0.82, y: 0.62, len: 118, thick: 0.16, curve: 12, angle: 42, alpha: 0.27, seed: 213.2, shape: 'arc', light: true },
   { x: -0.18, y: 0.28, len: 142, thick: 0.17, curve: 18, angle: -12, alpha: 0.24, seed: 214.3, shape: 'hook', light: true, edge: true },
   { x: 1.16, y: 0.34, len: 126, thick: 0.16, curve: -14, angle: 70, alpha: 0.23, seed: 215.4, shape: 'zig', light: true, edge: true },
   { x: 0.24, y: -0.16, len: 110, thick: 0.15, curve: 11, angle: 112, alpha: 0.22, seed: 216.5, shape: 'arc', light: true, edge: true },
