@@ -12,9 +12,9 @@ body {
   width: 140vw;
   height: 140vh;
   left: -20vw;
-  top: -14vh;
+  top: -42vh;
   overflow: hidden;
-  background: #ece7de url("bg-book-pov.png?v=book-image-1") center 96% / cover no-repeat;
+  background: #ece7de url("bg-book-pov.png?v=book-image-1") center bottom / cover no-repeat;
   transition: none;
   transform-origin: center center;
   will-change: transform;
