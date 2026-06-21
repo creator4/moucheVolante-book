@@ -56,8 +56,8 @@ const FLOATER_EASE       = 0.08;
 
 /* Fleck als Mini-Superfleck (lokal am Floater) – RESET auf Referenz */
 const FLECK_SUPER_SIZE      = 44;
-const FLECK_SUPER_TINT      = [18,19,24];           // dunklerer HF-Fleck
-const FLECK_SUPER_ALPHA     = 0.54;
+const FLECK_SUPER_TINT      = [72,74,84];           // deutlich hellerer HF-Fleck
+const FLECK_SUPER_ALPHA     = 0.46;
 const FLECK_SUPER_FEATHER   = 1.05;
 const FLECK_SUPER_DRAW_W    = 60 * SCALE * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.82 * 1.06; // etwas größer
 const FLECK_SUPER_DRAW_H    = FLECK_SUPER_DRAW_W * 0.88;
@@ -96,7 +96,7 @@ const BIGGER_SPEED_SCALE    = 0.15;
 
 /* ======= Grauer Superfleck (visuell rechts, dunkler) ======= */
 const SMALLER_POS_XF          = 0.62;
-const SMALLER_POS_YF          = 0.75;
+const SMALLER_POS_YF          = 0.70;
 const CLOUD_SMALLER_SIZE      = (BASE_UNIT_RADIUS * 2.2 * 5.0 * 5.25 * 0.5 * 0.7 * 0.8) * 0.75 * 1.5 * 2.0 * 0.9 * 0.9 * 0.9 * 0.86;
 const CLOUD_SMALLER_TINT      = [30,30,40];    // dunkler (rechts)
 const CLOUD_SMALLER_ALPHA     = 0.16;
@@ -111,7 +111,7 @@ const ORIGINAL_SCHL_COUNT = BASE_SCHL_COUNT + EXTRA_SCHL_COUNT;
 const SOFT_EXTRA_SCHL_COUNT = 22;
 const SCHL_COUNT        = ORIGINAL_SCHL_COUNT + SOFT_EXTRA_SCHL_COUNT;
 const SCHLC_TINT        = [98,100,114];
-const SCHLC_ALPHA       = 0.237;  // sehr transparent
+const SCHLC_ALPHA       = 0.190;  // sehr transparent
 const SCHLC_FEATHER     = 5.6;
 const SCHLC_LEN_MIN     = 76 * SCALE;
 const SCHLC_LEN_MAX     = 300 * SCALE;
@@ -3310,7 +3310,7 @@ const SHOW_CLOUDS = true;
 const SHOW_CLOUD_LABELS = false;
 const SHOW_SMALLER_CLOUD = false;
 const ELEMENT_ALPHA = 1.42;
-const NON_HF_ELEMENT_ALPHA = 2.45;
+const NON_HF_ELEMENT_ALPHA = 0.62;
 
 function elementVisibilityFactor(label) {
   if (label === 'Nuclei-Gruppe') return 0.38;
@@ -3532,7 +3532,7 @@ function markGreyCloudVariant(label, x, y, w, h) {
 function drawGreyCloudFleckSchliereStyle(cloud) {
 }
 
-function drawHFStyleCloudFleck(cloud, sizeMul = 1, softnessMul = 1, alphaMul = 1) {
+function drawHFStyleCloudFleck(cloud, sizeMul = 1, softnessMul = 1, alphaMul = 1, brightnessMul = 0.95, contrastMul = 0.98) {
   if (!SHOW_CLOUDS || !cloud) return;
   const x = cloud.pos.x;
   const y = cloud.pos.y + cloud.size * 0.00;
@@ -3543,7 +3543,7 @@ function drawHFStyleCloudFleck(cloud, sizeMul = 1, softnessMul = 1, alphaMul = 1
   drawingContext.save();
   if (floaterFleckCloud) {
     imageMode(CENTER);
-    drawingContext.filter = `brightness(0.66) contrast(1.08) blur(${FLECK_SUPER_BLUR_PX * 5.4 * softnessMul * cloudSoftness}px)`;
+    drawingContext.filter = `brightness(${brightnessMul}) contrast(${contrastMul}) blur(${FLECK_SUPER_BLUR_PX * 5.4 * softnessMul * cloudSoftness}px)`;
     tint(255, Math.min(255, Math.round((255 * alphaMul * cloudAlpha) / Math.max(1, softnessMul * 0.78))));
     image(floaterFleckCloud.pg, x, y, w, h);
     noTint();
@@ -3629,9 +3629,9 @@ function schliereThicknessMul(sc) {
 }
 
 function schliereAlphaMul(sc) {
-  if (sc._extraSoftSchliere) return 0.38;
-  if (sc._softSchliere) return 0.54;
-  return 1.12;
+  if (sc._extraSoftSchliere) return 0.32;
+  if (sc._softSchliere) return 0.45;
+  return 0.90;
 }
 
 function resetSchliereRenderFlags(sc, n) {
@@ -5577,7 +5577,7 @@ class FloaterPath {
     push();
     scale(this.lengthStretch * 0.92, 1);  // minimal horizontal zusammengestaucht
     drawingContext.save();
-    drawingContext.globalAlpha *= 0.78;
+    drawingContext.globalAlpha *= 0.92;
 
     // 1) Äußerster Gel-Glow – breit, sichtbar transparent, leicht weisslicher
     drawingContext.filter = 'blur(8px)';
@@ -5756,7 +5756,7 @@ class FloaterPath {
     image(floaterFleckCloud.pg, 0, 0, FLECK_SUPER_DRAW_W, FLECK_SUPER_DRAW_H);
     drawingContext.save();
     drawingContext.filter = `blur(${FLECK_SUPER_BLUR_PX * 2.4}px)`;
-    drawingContext.fillStyle = 'rgba(8, 9, 13, 0.34)';
+    drawingContext.fillStyle = 'rgba(64, 66, 76, 0.24)';
     drawingContext.beginPath();
     drawingContext.ellipse(
       FLECK_SUPER_DRAW_W * 0.22,
@@ -6859,7 +6859,7 @@ function draw() {
   // Kern weich angeglichen an Corona: größer, diffuser, geringerer Alpha
   // → keine harte Trennung mehr zwischen heller Corona und dunklem Kern
   {
-    drawHFStyleCloudFleck(biggerCloud, 1.22, 1, 2.15);
+    drawHFStyleCloudFleck(biggerCloud, 1.22, 1, 2.30, 1.22, 0.90);
     drawCloudLabel('F1', biggerCloud);
     if (upperLeftGreyCloud) {
       const f2Follow = createVector(
@@ -6875,7 +6875,7 @@ function draw() {
         1.55
       );
     }
-    drawHFStyleCloudFleck(upperLeftGreyCloud, 1.0, 2.10, 3.05);
+    drawHFStyleCloudFleck(upperLeftGreyCloud, 1.0, 2.10, 3.15);
     drawCloudLabel('F2', upperLeftGreyCloud);
     if (SHOW_CLOUDS) {
       f2CenterCopies.forEach((c, i) => {
@@ -6884,7 +6884,7 @@ function draw() {
           mouseDirNS.y * 0.72 + cos(frameCount * 0.012 + i) * 0.06
         );
         c.update(mouseMoving, [0.39, 0.61], [0.42, 0.62], SMALLER_SPEED_SCALE * 1.08, follow, 1.28);
-        drawHFStyleCloudFleck(c, 1.0, 2.10, 3.05);
+        drawHFStyleCloudFleck(c, 1.0, 2.10, 3.15);
       });
     }
   }
@@ -6997,7 +6997,7 @@ function draw() {
       smallerFollow,
       2.05
     );
-    drawHFStyleCloudFleck(smallerCloud, 1.0, 2.10, 2.65);
+    drawHFStyleCloudFleck(smallerCloud, 1.0, 2.10, 2.75);
     drawCloudLabel('F3', smallerCloud);
   }
   // Weisser Superfleck temporÃ¤r ausgeblendet.

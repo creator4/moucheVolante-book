@@ -15,9 +15,9 @@ let targetGlobalOrbitAngle = 0;
 let travelPhase = 0;
 let frameIndex = 0;
 let motionTotal = { x: 0, y: 0 };
-const SCHLIERE_SPRITE_REFRESH_FRAMES = 4;
+const SCHLIERE_SPRITE_REFRESH_FRAMES = 8;
 const SCHLIEREN_ALPHA_MUL = 1.26;
-const GREY_SCHLIEREN_ALPHA_MUL = 1.10;
+const GREY_SCHLIEREN_ALPHA_MUL = 0.86;
 const LIGHT_SCHLIEREN_ALPHA_MUL = 1.22;
 const SCHLIEREN_THICKNESS_MUL = 0.86;
 
@@ -92,11 +92,11 @@ const HELLE_SCHLIEREN = [
 const ALLE_SCHLIEREN = SCHLIEREN.concat(HELLE_SCHLIEREN);
 
 const SCHLIEREN_FLECKEN = [
-  { x: 0.23, y: 0.24, size: 17, alpha: 0.10, angle: -0.35, seed: 101.1 },
-  { x: 0.73, y: 0.28, size: 14, alpha: 0.08, angle: 0.18, seed: 102.2 },
-  { x: 0.46, y: 0.47, size: 19, alpha: 0.09, angle: -0.12, seed: 103.3 },
-  { x: 0.18, y: 0.72, size: 12, alpha: 0.07, angle: 0.42, seed: 104.4 },
-  { x: 0.82, y: 0.76, size: 15, alpha: 0.085, angle: -0.25, seed: 105.5 }
+  { x: 0.23, y: 0.24, size: 17, alpha: 0.072, angle: -0.35, seed: 101.1 },
+  { x: 0.73, y: 0.28, size: 14, alpha: 0.058, angle: 0.18, seed: 102.2 },
+  { x: 0.46, y: 0.47, size: 19, alpha: 0.065, angle: -0.12, seed: 103.3 },
+  { x: 0.18, y: 0.72, size: 12, alpha: 0.050, angle: 0.42, seed: 104.4 },
+  { x: 0.82, y: 0.76, size: 15, alpha: 0.061, angle: -0.25, seed: 105.5 }
 ];
 
 const ELEMENTE = [];
@@ -154,7 +154,7 @@ function stable01(seed) {
 }
 
 function resize() {
-  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  const dpr = 1;
   canvas.width = Math.round(window.innerWidth * dpr);
   canvas.height = Math.round(window.innerHeight * dpr);
   ctx = mainCtx;
@@ -536,7 +536,7 @@ function drawElement(item) {
   else if (item.kind === 'nuclei') drawNucleiGroup(item.alpha);
   else if (item.kind === 'triangle') drawTriangleGroup(item.alpha);
   else if (item.kind === 'round') drawRoundElement(item.alpha);
-  else drawDiffuseCloud(item.alpha, item.kind === 'greycloud' ? 95 : 58);
+  else drawDiffuseCloud(item.alpha * 1.28, item.kind === 'greycloud' ? 95 : 58);
 
   ctx.restore();
 }

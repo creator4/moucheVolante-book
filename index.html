@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mouche Volante - Book</title>
-  <link rel="preload" as="image" href="bg-book-pov.png?v=book-image-1">
+  <link rel="preload" as="image" href="bg-book-pov.png?v=book-image-hands-1">
   <link rel="stylesheet" href="style.css?v=book-image-2">
 </head>
 <body class="is-loading">
@@ -19,7 +19,7 @@
       const img = new Image();
       img.onload = resolve;
       img.onerror = resolve;
-      img.src = "bg-book-pov.png?v=book-image-1";
+      img.src = "bg-book-pov.png?v=book-image-hands-1";
     });
     Promise.all([bgReady, new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))])
       .then(() => document.body.classList.remove("is-loading"));
