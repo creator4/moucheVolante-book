@@ -96,7 +96,7 @@ const BIGGER_SPEED_SCALE    = 0.15;
 
 /* ======= Grauer Superfleck (visuell rechts, dunkler) ======= */
 const SMALLER_POS_XF          = 0.62;
-const SMALLER_POS_YF          = 0.70;
+const SMALLER_POS_YF          = 0.66;
 const CLOUD_SMALLER_SIZE      = (BASE_UNIT_RADIUS * 2.2 * 5.0 * 5.25 * 0.5 * 0.7 * 0.8) * 0.75 * 1.5 * 2.0 * 0.9 * 0.9 * 0.9 * 0.86;
 const CLOUD_SMALLER_TINT      = [30,30,40];    // dunkler (rechts)
 const CLOUD_SMALLER_ALPHA     = 0.16;

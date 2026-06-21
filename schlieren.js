@@ -17,7 +17,7 @@ let frameIndex = 0;
 let motionTotal = { x: 0, y: 0 };
 const SCHLIERE_SPRITE_REFRESH_FRAMES = 8;
 const SCHLIEREN_ALPHA_MUL = 1.26;
-const GREY_SCHLIEREN_ALPHA_MUL = 0.86;
+const GREY_SCHLIEREN_ALPHA_MUL = 0.94;
 const LIGHT_SCHLIEREN_ALPHA_MUL = 1.22;
 const SCHLIEREN_THICKNESS_MUL = 0.86;
 
